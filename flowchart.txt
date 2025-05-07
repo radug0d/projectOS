@@ -1,0 +1,12 @@
+/root
+..treasure_manager
+..HUNTS/
+.......Hunt001/
+..............treasure.data
+..............logfile.txt
+.......Hunt002
+.......Hunt003
+..symlinklog001
+..symlinklog002
+..symlinklog003
+
