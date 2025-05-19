@@ -49,7 +49,6 @@ void add_treasure(Treasure_t* buff_struct) {
     char input_buffer[TEXT_BUFFER];
     int valid_input;
     
-    // treasure ID
     sprintf(temp, "%s", "Give treasure id: ");
     if (write(STDOUT_FILENO, temp, strlen(temp)) == -1) {
         abandonCSTM();
@@ -72,7 +71,6 @@ void add_treasure(Treasure_t* buff_struct) {
     strncpy(buff_struct->treasure_id, input_buffer, sizeof(buff_struct->treasure_id) - 1);
     buff_struct->treasure_id[sizeof(buff_struct->treasure_id) - 1] = '\0';
     
-    // get username
     sprintf(temp, "%s", "Give treasure username: ");
     if (write(STDOUT_FILENO, temp, strlen(temp)) == -1) {
         abandonCSTM();
@@ -95,7 +93,6 @@ void add_treasure(Treasure_t* buff_struct) {
     strncpy(buff_struct->user_name, input_buffer, sizeof(buff_struct->user_name) - 1);
     buff_struct->user_name[sizeof(buff_struct->user_name) - 1] = '\0';
     
-    // get X
     valid_input = 0;
     while (!valid_input) {
         sprintf(temp, "%s", "Give treasure coordX: ");
@@ -120,7 +117,6 @@ void add_treasure(Treasure_t* buff_struct) {
         }
     }
     
-    // get Y
     valid_input = 0;
     while (!valid_input) {
         sprintf(temp, "%s", "Give treasure coordY: ");
@@ -145,7 +141,6 @@ void add_treasure(Treasure_t* buff_struct) {
         }
     }
     
-    // get clue
     sprintf(temp, "%s", "Give treasure clue: ");
     if (write(STDOUT_FILENO, temp, strlen(temp)) == -1) {
         abandonCSTM();
@@ -159,7 +154,6 @@ void add_treasure(Treasure_t* buff_struct) {
     strncpy(buff_struct->clue, input_buffer, sizeof(buff_struct->clue) - 1);
     buff_struct->clue[sizeof(buff_struct->clue) - 1] = '\0';
     
-    // get value
     valid_input = 0;
     while (!valid_input) {
         sprintf(temp, "%s", "Give treasure value: ");
@@ -212,7 +206,7 @@ void parse_and_add_treasure(Treasure_t* buff_struct, const char* input_string) {
         abandonCSTM();
     }
     
-    // process the treasure ID
+
     trim_string(lines[0]);
     if (strlen(lines[0]) == 0) {
         sprintf(temp, "%s", "Error: Treasure ID cannot be empty\n");
@@ -224,7 +218,6 @@ void parse_and_add_treasure(Treasure_t* buff_struct, const char* input_string) {
     strncpy(buff_struct->treasure_id, lines[0], sizeof(buff_struct->treasure_id) - 1);
     buff_struct->treasure_id[sizeof(buff_struct->treasure_id) - 1] = '\0';
     
-    // process new username
     trim_string(lines[1]);
     if (strlen(lines[1]) == 0) {
         sprintf(temp, "%s", "Username can't be empty\n");
@@ -236,7 +229,7 @@ void parse_and_add_treasure(Treasure_t* buff_struct, const char* input_string) {
     strncpy(buff_struct->user_name, lines[1], sizeof(buff_struct->user_name) - 1);
     buff_struct->user_name[sizeof(buff_struct->user_name) - 1] = '\0';
     
-    // process X
+
     trim_string(lines[2]);
     if (!is_valid_number(lines[2])) {
         sprintf(temp, "%s", "Invalid value for coordinate X ...\n");
@@ -247,7 +240,6 @@ void parse_and_add_treasure(Treasure_t* buff_struct, const char* input_string) {
     }
     buff_struct->coordinateX = atof(lines[2]);
     
-    // process Y
     trim_string(lines[3]);
     if (!is_valid_number(lines[3])) {
         sprintf(temp, "%s", "Invalid value for coordinate Y ...\n");
@@ -258,11 +250,9 @@ void parse_and_add_treasure(Treasure_t* buff_struct, const char* input_string) {
     }
     buff_struct->coordinateY = atof(lines[3]);
     
-    // process clue
     strncpy(buff_struct->clue, lines[4], sizeof(buff_struct->clue) - 1);
     buff_struct->clue[sizeof(buff_struct->clue) - 1] = '\0';
     
-    // process value
     trim_string(lines[5]);
     if (!is_valid_integer(lines[5])) {
         sprintf(temp, "%s", "Invalid value for treasure ...\n");
